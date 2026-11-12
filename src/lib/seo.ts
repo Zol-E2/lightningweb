@@ -8,6 +8,15 @@ import {
   type PageKey,
 } from "@/lib/i18n";
 import { REF, type RefKey } from "@/lib/refs";
+import { postHref, type Post } from "@/lib/posts";
+
+/** Default share image (Facebook, Messenger, LinkedIn…). */
+const OG_IMAGE = {
+  url: "/og.png",
+  width: 1200,
+  height: 630,
+  alt: "LightningWeb",
+};
 
 const TEXT: Record<
   PageKey,
@@ -136,7 +145,9 @@ export function pageMetadata(lang: Lang, page: PageKey): Metadata {
       locale: lang === "hu" ? "hu_HU" : "en_GB",
       type: "website",
       siteName: "LightningWeb",
+      images: [OG_IMAGE],
     },
+    twitter: { card: "summary_large_image" },
     robots: page === "privacy" ? { index: false } : undefined,
   };
 }
@@ -154,11 +165,34 @@ export function caseMetadata(lang: Lang, k: RefKey): Metadata {
       title,
       description: d.lead,
       url: path,
-      images: "shots" in r ? [{ url: r.shots.d }] : undefined,
+      images: "shots" in r ? [{ url: r.shots.d }] : [OG_IMAGE],
       locale: lang === "hu" ? "hu_HU" : "en_GB",
       type: "article",
       siteName: "LightningWeb",
     },
+    twitter: { card: "summary_large_image" },
+  };
+}
+
+export function postMetadata(lang: Lang, p: Post): Metadata {
+  const t = p[lang];
+  const path = postHref(lang, p);
+  const other: Lang = lang === "hu" ? "en" : "hu";
+  return {
+    title: t.title,
+    description: t.desc,
+    alternates: alternates(lang, path, postHref(other, p)),
+    openGraph: {
+      title: t.title,
+      description: t.desc,
+      url: path,
+      images: [OG_IMAGE],
+      locale: lang === "hu" ? "hu_HU" : "en_GB",
+      type: "article",
+      publishedTime: p.date,
+      siteName: "LightningWeb",
+    },
+    twitter: { card: "summary_large_image" },
   };
 }
 

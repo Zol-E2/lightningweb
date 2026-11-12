@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { caseHref, ROUTES, SITE_URL, type PageKey } from "@/lib/i18n";
 import { REF_KEYS } from "@/lib/refs";
+import { POSTS, postHref } from "@/lib/posts";
 
 const abs = (p: string) => `${SITE_URL}${p === "/" ? "" : p}`;
 
@@ -29,6 +30,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             hu: abs(caseHref("hu", key)),
             en: abs(caseHref("en", key)),
           },
+        },
+      });
+    }
+  }
+  for (const p of POSTS) {
+    for (const lang of ["hu", "en"] as const) {
+      entries.push({
+        url: abs(postHref(lang, p)),
+        lastModified: p.date,
+        priority: 0.7,
+        alternates: {
+          languages: { hu: abs(postHref("hu", p)), en: abs(postHref("en", p)) },
         },
       });
     }

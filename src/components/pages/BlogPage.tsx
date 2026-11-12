@@ -1,5 +1,27 @@
 import Link from "next/link";
-import { href, type Lang } from "@/lib/i18n";
+import { type Lang } from "@/lib/i18n";
+import { POSTS, postHref, type Post } from "@/lib/posts";
+
+export function PostCard({ lang, post }: { lang: Lang; post: Post }) {
+  const t = post[lang];
+  return (
+    <Link className="post" href={postHref(lang, post)}>
+      <div className="cover" style={{ background: post.cover }}>
+        <svg aria-hidden="true">
+          <use href={`#${post.icon}`} />
+        </svg>
+      </div>
+      <div className="body">
+        <div className="meta mono">
+          <span>{t.cat}</span>
+          <span>{post.minutes} min</span>
+        </div>
+        <h3>{t.title}</h3>
+        <p>{t.desc}</p>
+      </div>
+    </Link>
+  );
+}
 
 export default function BlogPage({ lang }: { lang: Lang }) {
   const hu = lang === "hu";
@@ -24,84 +46,9 @@ export default function BlogPage({ lang }: { lang: Lang }) {
       </section>
       <section className="sec paper">
         <div className="wrap posts">
-          <Link className="post" href={href(lang, "blog")}>
-            <div
-              className="cover"
-              style={{ background: "linear-gradient(140deg,#0a7f9e,#07303c)" }}
-            >
-              <svg>
-                <use href="#i-search" />
-              </svg>
-            </div>
-            <div className="body">
-              <div className="meta mono">
-                <span>Google</span>
-                <span>6 min</span>
-              </div>
-              {hu ? (
-                <h3>Így kerülj a Google Térkép élére</h3>
-              ) : (
-                <h3>How to top Google Maps</h3>
-              )}
-              {hu ? (
-                <p>Lépésről lépésre, szakszavak nélkül.</p>
-              ) : (
-                <p>Step by step, no jargon.</p>
-              )}
-            </div>
-          </Link>
-          <Link className="post" href={href(lang, "blog")}>
-            <div
-              className="cover"
-              style={{ background: "linear-gradient(140deg,#c2456b,#4a1426)" }}
-            >
-              <svg>
-                <use href="#i-shop" />
-              </svg>
-            </div>
-            <div className="body">
-              <div className="meta mono">
-                <span>Web</span>
-                <span>4 min</span>
-              </div>
-              {hu ? (
-                <h3>Mennyibe kerül egy weboldal 2026-ban?</h3>
-              ) : (
-                <h3>What does a website cost in 2026?</h3>
-              )}
-              {hu ? (
-                <p>Mitől függ az ár, és mire figyelj az ajánlatoknál.</p>
-              ) : (
-                <p>What drives the price and what to check in quotes.</p>
-              )}
-            </div>
-          </Link>
-          <Link className="post" href={href(lang, "blog")}>
-            <div
-              className="cover"
-              style={{ background: "linear-gradient(140deg,#e2571e,#4a1a06)" }}
-            >
-              <svg>
-                <use href="#i-factory" />
-              </svg>
-            </div>
-            <div className="body">
-              <div className="meta mono">
-                <span>Web</span>
-                <span>5 min</span>
-              </div>
-              {hu ? (
-                <h3>Weboldal gyártó cégeknek: mi kell rá?</h3>
-              ) : (
-                <h3>Websites for manufacturers: what to include</h3>
-              )}
-              {hu ? (
-                <p>Ajánlatkérés, referenciák, géppark: ami tényleg számít.</p>
-              ) : (
-                <p>Quote forms, projects, equipment: what actually matters.</p>
-              )}
-            </div>
-          </Link>
+          {POSTS.map((p) => (
+            <PostCard key={p.key} lang={lang} post={p} />
+          ))}
         </div>
       </section>
     </>

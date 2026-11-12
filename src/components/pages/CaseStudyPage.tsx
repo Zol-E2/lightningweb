@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { caseHref, href, type Lang } from "@/lib/i18n";
+import { caseHref, href, SITE_URL, type Lang } from "@/lib/i18n";
+import JsonLd, { breadcrumbs } from "@/components/JsonLd";
 import { REF, REF_KEYS, type RefKey } from "@/lib/refs";
 import { RefPhone, RefSite, Shot } from "@/components/RefMock";
 
@@ -26,6 +27,13 @@ export default function CaseStudyPage({ lang, k }: { lang: Lang; k: RefKey }) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbs([
+          ["LightningWeb", SITE_URL + href(lang, "home")],
+          [hu ? "Munkáink" : "Our work", SITE_URL + href(lang, "work")],
+          [r.name, SITE_URL + caseHref(lang, k)],
+        ])}
+      />
       <section className="sub ink">
         <div className="grid-bg" />
         <div className="wrap">

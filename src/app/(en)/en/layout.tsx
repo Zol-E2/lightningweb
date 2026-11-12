@@ -6,3 +6,5 @@ export const metadata = baseMetadata;
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <RootDoc lang="en">{children}</RootDoc>;
 }
+
+export const viewport = { themeColor: "#07080a" };
