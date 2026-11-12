@@ -30,6 +30,7 @@ function JsonLd({ lang }: { lang: Lang }) {
       "Ibrány",
       "Szabolcs-Szatmár-Bereg",
       "Hajdú-Bihar",
+      "Borsod-Abaúj-Zemplén",
       "Magyarország",
     ],
     knowsLanguage: ["hu", "en"],

@@ -45,9 +45,9 @@ export default function AboutPage({ lang }: { lang: Lang }) {
             <div className="pbadge pb2">
               <span className="dot" />
               {hu ? (
-                <span>Debrecen · Szabolcs · országosan</span>
+                <span>Szabolcs és környéke · országosan</span>
               ) : (
-                <span>Debrecen · Szabolcs · nationwide</span>
+                <span>Szabolcs region · nationwide</span>
               )}
             </div>
           </div>
@@ -67,18 +67,18 @@ export default function AboutPage({ lang }: { lang: Lang }) {
             {hu ? (
               <p>
                 Közel három éve építek weboldalakat és kezelek hirdetéseket
-                debreceni, szabolcsi, országos és külföldi vállalkozásoknak. A
-                LightningWebet azért indítottam, hogy egy kis cég is olyan
+                szabolcsi és környékbeli, országos és külföldi vállalkozásoknak.
+                A LightningWebet azért indítottam, hogy egy kis cég is olyan
                 gyors, profi és jól eladó weboldalt kapjon, mint a nagy márkák,
                 csak ügynökségi bürokrácia nélkül.
               </p>
             ) : (
               <p>
                 For almost three years I’ve been building websites and running
-                ads for businesses in Debrecen, Szabolcs, across Hungary and
-                abroad. I started LightningWeb so a small company can get a
-                website as fast, professional and effective as the big brands
-                have, without agency red tape.
+                ads for businesses in Szabolcs and nearby counties, across
+                Hungary and abroad. I started LightningWeb so a small company
+                can get a website as fast, professional and effective as the big
+                brands have, without agency red tape.
               </p>
             )}
             {hu ? (
