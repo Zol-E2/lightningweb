@@ -77,9 +77,11 @@ export default function ContactPage({ lang }: { lang: Lang }) {
                 </span>
                 <strong>
                   {hu ? (
-                    <span>Debrecen, Szabolcs · online országosan</span>
+                    <span>Szabolcs és környező megyék · online országosan</span>
                   ) : (
-                    <span>Debrecen, Szabolcs · online nationwide</span>
+                    <span>
+                      Szabolcs and nearby counties · online nationwide
+                    </span>
                   )}
                 </strong>
               </div>
