@@ -265,9 +265,17 @@ export default function Nav({
         <div className="wrap ov-foot mono">
           <span>Finest Quality Quickly</span>
           <span>
-            <a href={CONTACT.social.facebook}>Facebook</a> ·{" "}
-            <a href={CONTACT.social.instagram}>Instagram</a> ·{" "}
-            <a href={CONTACT.social.linkedin}>LinkedIn</a>
+            <a href={CONTACT.social.facebook} target="_blank" rel="noopener">
+              Facebook
+            </a>{" "}
+            ·{" "}
+            <a href={CONTACT.social.instagram} target="_blank" rel="noopener">
+              Instagram
+            </a>{" "}
+            ·{" "}
+            <a href={CONTACT.social.linkedin} target="_blank" rel="noopener">
+              LinkedIn
+            </a>
           </span>
         </div>
       </div>

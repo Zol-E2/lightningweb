@@ -117,13 +117,31 @@ export default function Shell({
               <h2>Social</h2>
               <ul>
                 <li>
-                  <a href={CONTACT.social.facebook}>Facebook</a>
+                  <a
+                    href={CONTACT.social.facebook}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Facebook
+                  </a>
                 </li>
                 <li>
-                  <a href={CONTACT.social.instagram}>Instagram</a>
+                  <a
+                    href={CONTACT.social.instagram}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Instagram
+                  </a>
                 </li>
                 <li>
-                  <a href={CONTACT.social.linkedin}>LinkedIn</a>
+                  <a
+                    href={CONTACT.social.linkedin}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    LinkedIn
+                  </a>
                 </li>
               </ul>
             </div>

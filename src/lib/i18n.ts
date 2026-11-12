@@ -33,11 +33,14 @@ export function altPath(lang: Lang, page: PageKey, caseKey?: string): string {
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://lightningweb.hu";
 
-/** Contact details shown across the site. Placeholders until Zoltan fills them in. */
+/** Contact details shown across the site. */
 export const CONTACT = {
   email: "info@lightningweb.hu",
-  phone: "+36 00 000 0000",
-  phoneHref: "tel:+36000000000",
-  whatsapp: "+36 00 000 0000",
-  social: { facebook: "#", instagram: "#", linkedin: "#" },
+  phone: "+36 30 137 5903",
+  phoneHref: "tel:+36301375903",
+  social: {
+    facebook: "https://www.facebook.com/lightningwebdesign",
+    instagram: "https://www.instagram.com/lightningweb/",
+    linkedin: "https://www.linkedin.com/in/zoltan-elek-584365213/",
+  },
 };

@@ -15,8 +15,23 @@ function JsonLd({ lang }: { lang: Lang }) {
     name: "LightningWeb",
     url: SITE_URL,
     email: CONTACT.email,
+    telephone: CONTACT.phone.replace(/\s/g, ""),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Ibrány",
+      addressRegion: "Szabolcs-Szatmár-Bereg",
+      addressCountry: "HU",
+    },
+    sameAs: Object.values(CONTACT.social),
     slogan: "Finest Quality Quickly",
-    areaServed: ["Szabolcs-Szatmár-Bereg", "Hungary"],
+    areaServed: [
+      "Debrecen",
+      "Nyíregyháza",
+      "Ibrány",
+      "Szabolcs-Szatmár-Bereg",
+      "Hajdú-Bihar",
+      "Magyarország",
+    ],
     knowsLanguage: ["hu", "en"],
     description:
       lang === "hu"

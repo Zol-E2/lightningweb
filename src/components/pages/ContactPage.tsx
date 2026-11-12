@@ -72,18 +72,14 @@ export default function ContactPage({ lang }: { lang: Lang }) {
                 </strong>
               </div>
               <div className="ch">
-                <span className="mono">WhatsApp</span>
-                <strong>{CONTACT.whatsapp}</strong>
-              </div>
-              <div className="ch">
                 <span className="mono">
                   {hu ? <span>Terület</span> : <span>Area</span>}
                 </span>
                 <strong>
                   {hu ? (
-                    <span>Város és környéke · online országosan</span>
+                    <span>Debrecen, Szabolcs · online országosan</span>
                   ) : (
-                    <span>City and region · online nationwide</span>
+                    <span>Debrecen, Szabolcs · online nationwide</span>
                   )}
                 </strong>
               </div>

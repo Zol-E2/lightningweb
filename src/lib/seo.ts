@@ -26,7 +26,7 @@ const TEXT: Record<
     hu: {
       title: "LightningWeb – Weboldal készítés, webshop és online marketing",
       description:
-        "Gyors, modern weboldal és webshop kisvállalkozásoknak, Google és Facebook hirdetéssel, SEO-val. Fix ár, fix határidő, érthetően. Szabolcs és országosan.",
+        "Gyors, modern weboldal és webshop kisvállalkozásoknak, Google és Facebook hirdetéssel, SEO-val. Fix ár, fix határidő, érthetően. Debrecen, Szabolcs és országosan.",
     },
     en: {
       title: "LightningWeb – Websites, online stores and digital marketing",
