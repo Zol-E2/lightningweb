@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "lightningweb",
+  "main": ".open-next/worker.js",
+  "upload_source_maps": true,
+  "compatibility_date": "2026-11-12",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // Public, non-secret settings. Secrets (RESEND_API_KEY, PAGESPEED_API_KEY) are set
+  // in the Cloudflare dashboard or with `npx wrangler secret put NAME`.
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://lightningweb.hu",
+    "CONTACT_TO": "info@lightningweb.hu",
+    "CONTACT_FROM": "LightningWeb <urlap@lightningweb.hu>"
+  }
+}
