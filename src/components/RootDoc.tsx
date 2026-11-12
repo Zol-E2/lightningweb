@@ -1,3 +1,4 @@
+import NavProgress from "@/components/NavProgress";
 import type { ReactNode } from "react";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import type { Lang } from "@/lib/i18n";
@@ -35,14 +36,11 @@ export default function RootDoc({
     <html
       lang={lang}
       className={`${sans.variable} ${mono.variable} ${serif.variable}`}
+      style={{ background: "#07080a" }}
     >
       <body>
         <Sprite />
-        <div className="intro" aria-hidden="true">
-          <svg viewBox="0 0 270 660">
-            <use href="#bolt" />
-          </svg>
-        </div>
+        <NavProgress label={lang === "hu" ? "Betöltés…" : "Loading…"} />
         {children}
       </body>
     </html>

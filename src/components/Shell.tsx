@@ -70,7 +70,7 @@ export default function Shell({
               <p className="slogan">Finest Quality Quickly.</p>
             </div>
             <div>
-              <h4>{hu ? "Oldalak" : "Pages"}</h4>
+              <h2>{hu ? "Oldalak" : "Pages"}</h2>
               <ul>
                 <li>
                   <Link href={href(lang, "services")}>
@@ -98,7 +98,7 @@ export default function Shell({
               </ul>
             </div>
             <div>
-              <h4>{hu ? "Kapcsolat" : "Contact"}</h4>
+              <h2>{hu ? "Kapcsolat" : "Contact"}</h2>
               <ul>
                 <li>
                   <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
@@ -114,7 +114,7 @@ export default function Shell({
               </ul>
             </div>
             <div>
-              <h4>Social</h4>
+              <h2>Social</h2>
               <ul>
                 <li>
                   <a href={CONTACT.social.facebook}>Facebook</a>

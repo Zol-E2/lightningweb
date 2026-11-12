@@ -1,4 +1,5 @@
 import { type Lang } from "@/lib/i18n";
+import Img from "@/components/Img";
 
 export default function AboutPage({ lang }: { lang: Lang }) {
   const hu = lang === "hu";
@@ -25,11 +26,12 @@ export default function AboutPage({ lang }: { lang: Lang }) {
         <div className="wrap founder">
           <div className="portrait-wrap">
             <div className="portrait">
-              <img
-                src="/img/zoltan.jpg"
+              <Img
+                src="/img/zoltan.webp"
+                width={636}
+                height={795}
                 alt="Zoltán, a LightningWeb alapítója"
                 loading="lazy"
-                decoding="async"
               />
             </div>
             <div className="pbadge pb1">

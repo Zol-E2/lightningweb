@@ -2,8 +2,7 @@
 
 import { useEffect } from "react";
 
-const SEL =
-  ".sec-head, .tile, .wcard, .step, .case, .g, .plan, .ba, .race, .live, .sd, .feat, .calc, .report, .post, .partner, .quote, .csr > div, .faq";
+const SEL = ".sec-head, .tile, .case, .plan, .sd, .post";
 
 /**
  * Scroll reveal: blocks below the fold fade in as they enter the screen.
@@ -36,7 +35,7 @@ export default function Reveal() {
           el.parentElement?.children ?? [],
           el,
         );
-        el.style.animationDelay = `${(n % 4) * 70}ms`;
+        el.style.animationDelay = `${(n % 4) * 50}ms`;
         el.classList.add("pre");
         io.observe(el);
       }

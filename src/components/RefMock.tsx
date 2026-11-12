@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { Lang } from "@/lib/i18n";
 import { REF, type RefKey } from "@/lib/refs";
 import { Icon } from "@/components/Icon";
+import Img from "@/components/Img";
 
 const vars = (k: RefKey) => {
   const r = REF[k];
@@ -25,7 +26,7 @@ export function RefSite({ k, lang }: { k: RefKey; lang: Lang }) {
       <div className="site-hero">
         <div>
           <em className="sbadge">{m.badge}</em>
-          <h5>{m.h}</h5>
+          <div className="h5">{m.h}</div>
           <p>{m.sub}</p>
           <span className="sbtn">{m.btn}</span>
         </div>
@@ -59,7 +60,7 @@ export function RefPhone({ k, lang }: { k: RefKey; lang: Lang }) {
         <div className="site-img">
           <Icon id={r.ic} />
         </div>
-        <h5>{m.h}</h5>
+        <div className="h5">{m.h}</div>
         <span className="sbtn">{m.btn}</span>
       </div>
     </div>
@@ -80,13 +81,13 @@ export function Shot({
   const r = REF[k];
   if (!("shots" in r)) return null;
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <Img
       className={className}
       src={r.shots[which]}
       alt={`${r.name} ${lang === "hu" ? "weboldal" : "website"}`}
+      width={which === "m" ? 375 : 790}
+      height={which === "m" ? 790 : 494}
       loading="lazy"
-      decoding="async"
     />
   );
 }

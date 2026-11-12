@@ -169,22 +169,24 @@ export default function Nav({
           <div className="nav-r">
             <div className="lang" role="group" aria-label="Nyelv / Language">
               {/* A real link to the same page in the other language (good for SEO too). */}
-              <a
-                href={hu ? undefined : alt}
-                aria-current={hu ? "true" : undefined}
-                hrefLang="hu"
-                lang="hu"
-              >
-                HU
-              </a>
-              <a
-                href={hu ? alt : undefined}
-                aria-current={hu ? undefined : "true"}
-                hrefLang="en"
-                lang="en"
-              >
-                EN
-              </a>
+              {hu ? (
+                <span aria-current="true" lang="hu">
+                  HU
+                </span>
+              ) : (
+                <a href={alt} hrefLang="hu" lang="hu">
+                  HU
+                </a>
+              )}
+              {hu ? (
+                <a href={alt} hrefLang="en" lang="en">
+                  EN
+                </a>
+              ) : (
+                <span aria-current="true" lang="en">
+                  EN
+                </span>
+              )}
             </div>
             <Link className="btn btn-volt cta-s" href={href(lang, "contact")}>
               {hu ? "Ajánlatkérés" : "Get a quote"}

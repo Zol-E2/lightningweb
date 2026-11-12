@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { caseHref, type Lang } from "@/lib/i18n";
 import { REF, REF_KEYS } from "@/lib/refs";
 import { Bolt, Icon } from "@/components/Icon";
+import Img from "@/components/Img";
 
 /** Hero showcase: laptop + phone mock-up cycling through the real projects. */
 export default function Showcase({ lang }: { lang: Lang }) {
@@ -60,7 +61,7 @@ export default function Showcase({ lang }: { lang: Lang }) {
             </div>
             <div className="site-hero">
               <div>
-                <h5>{m.h}</h5>
+                <div className="h5">{m.h}</div>
                 <p>{m.sub}</p>
                 <span className="sbtn">{m.btn}</span>
               </div>
@@ -74,24 +75,24 @@ export default function Showcase({ lang }: { lang: Lang }) {
               ))}
             </div>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Img
             key={`si${tick}`}
             className={`simg ${shots ? swap : "off"}`}
-            src={shots?.d ?? "/img/tasko-d.jpg"}
+            src={shots?.d ?? "/img/tasko-d.webp"}
             alt={shots ? `${r.name} ${hu ? "weboldal" : "website"}` : ""}
-            decoding="async"
+            width={790}
+            height={494}
             fetchPriority={idx === 0 ? "high" : undefined}
           />
         </div>
         <div className="phone">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Img
             key={`mi${tick}`}
             className={`pimg ${shots ? swap : "off"}`}
-            src={shots?.m ?? "/img/tasko-m.jpg"}
+            src={shots?.m ?? "/img/tasko-m.webp"}
             alt=""
-            decoding="async"
+            width={375}
+            height={790}
           />
           <div className={`site ${swap}`} style={vars} key={`m${tick}`}>
             <div className="site-nav">
@@ -100,7 +101,7 @@ export default function Showcase({ lang }: { lang: Lang }) {
             <div className="site-img">
               <Icon id={r.ic} />
             </div>
-            <h5>{m.h}</h5>
+            <div className="h5">{m.h}</div>
             <span className="sbtn">{m.btn}</span>
           </div>
         </div>

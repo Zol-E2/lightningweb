@@ -536,9 +536,9 @@ export default function HomePage({ lang }: { lang: Lang }) {
               <div className="n-hero">
                 <div className="n-img" />
                 <div>
-                  <h5>
+                  <div className="h5">
                     Minőség, ami <i>tovább</i> tart.
-                  </h5>
+                  </div>
                   <p>
                     Több mint 25 év tapasztalat. Kérj ajánlatot, és 24 órán
                     belül visszahívunk.
