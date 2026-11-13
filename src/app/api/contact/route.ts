@@ -147,7 +147,6 @@ function confirmation(lang: "hu" | "en", name: string) {
   );
   const html =
     `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#111">` +
-    `<p style="margin:0 0 24px"><a href="https://lightningweb.hu"><img src="https://lightningweb.hu/email-logo.png" width="234" height="70" alt="LightningWeb" style="display:block;border:0"></a></p>` +
     `<p>${esc(hello)}</p>` +
     lines.map((l) => `<p>${esc(l)}</p>`).join("") +
     `<p>${esc(sign).replace("\n", "<br>")}<br><a href="https://lightningweb.hu">lightningweb.hu</a></p></div>`;
