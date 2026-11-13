@@ -94,8 +94,8 @@ export default function Showcase({ lang }: { lang: Lang }) {
             className={`pimg ${phone ? swap : "off"}`}
             src={phone ?? REF.tasko.shots.m}
             alt=""
-            width={375}
-            height={790}
+            width={400}
+            height={700}
           />
           <div className={`site ${swap}`} style={vars} key={`m${tick}`}>
             <div className="site-nav">

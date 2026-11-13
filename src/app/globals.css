@@ -909,7 +909,8 @@ header.nav {
   right: 0;
   bottom: 0;
   width: 25%;
-  aspect-ratio: 9/19;
+  /* matches the phone screenshots (visible page area without browser bars) */
+  aspect-ratio: 9/16;
   border-radius: 22px;
   background: #111;
   padding: 5px;

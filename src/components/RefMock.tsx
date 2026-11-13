@@ -97,8 +97,8 @@ export function Shot({
         className={className}
         src={r.shots.m}
         alt={alt}
-        width={375}
-        height={790}
+        width={400}
+        height={700}
         loading="lazy"
       />
     );

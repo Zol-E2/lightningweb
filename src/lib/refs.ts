@@ -389,6 +389,7 @@ export const REF = {
     live: "https://envolve.hu",
     shots: {
       d: shot("envolve-home", 506, "Diák kezdőoldal", "Student home"),
+      m: "/img/envolve-m.webp",
       gal: [
         shot("envolve-lesson", 411, "Hangalapú AI lecke", "AI voice lesson"),
         shot(
