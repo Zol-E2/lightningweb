@@ -107,12 +107,19 @@ export default function Checker({ lang }: { lang: Lang }) {
       if (!res.ok || data.error || data.perf == null)
         throw new Error(data.error ?? "failed");
       setRep({ dom, s: data as Scores, sample: false });
-    } catch {
+    } catch (err) {
+      const code = err instanceof Error ? err.message : "";
+      setRep({ dom, s: SAMPLE.s, sample: false });
       setError(
-        L(
-          "Most nem sikerült lemérni az oldalt (lehet, hogy nem elérhető, vagy túl lassan válaszol). Kérj ingyenes elemzést, és mi megnézzük helyetted.",
-          "We couldn’t measure the site right now (it may be offline or too slow to respond). Request a free analysis and we’ll check it for you.",
-        ),
+        code === "busy"
+          ? L(
+              "A Google mérőszolgáltatása most túlterhelt. Próbáld újra egy perc múlva, vagy kérj ingyenes elemzést, és mi megnézzük helyetted.",
+              "Google’s measuring service is busy right now. Try again in a minute, or request a free analysis and we’ll check it for you.",
+            )
+          : L(
+              "Ezt az oldalt most nem sikerült lemérni. Lehet, hogy nem elérhető, túl lassan válaszol, vagy letiltja az automatikus mérést (ilyen például a Facebook). Kérj ingyenes elemzést, és mi megnézzük helyetted.",
+              "We couldn’t measure this site. It may be offline, too slow to respond, or it blocks automated tests (Facebook does, for example). Request a free analysis and we’ll check it for you.",
+            ),
       );
     } finally {
       clearInterval(stepTimer.current);
@@ -271,46 +278,57 @@ export default function Checker({ lang }: { lang: Lang }) {
         ) : (
           <>
             <div className="rep-top">
-              <span className="rep-dom" style={{ "--c": c } as CSSProperties}>
+              <span
+                className="rep-dom"
+                style={{ "--c": error ? "#ff5d5d" : c } as CSSProperties}
+              >
                 <i />
                 {rep.dom}
               </span>
               <span className="rep-tag">
-                {rep.sample
-                  ? L("Minta eredmény", "Sample result")
-                  : L("Mobil mérés", "Mobile test")}
+                {error
+                  ? L("Sikertelen mérés", "Test failed")
+                  : rep.sample
+                    ? L("Minta eredmény", "Sample result")
+                    : L("Mobil mérés", "Mobile test")}
               </span>
             </div>
             {error && <p className="chk-err">{error}</p>}
-            <div className="grade" style={{ "--c": c } as CSSProperties}>
-              <b>{g}</b>
-              <span>
-                <strong>{verdict}</strong>
-                {L("Összpontszám: ", "Overall score: ")}
-                {avg}/100
-              </span>
-            </div>
-            <div className="gauges">
-              <Gauge label={L("Sebesség", "Speed")} v={s.perf} />
-              <Gauge label={L("Mobil", "Mobile")} v={s.mob} />
-              <Gauge label="Google" v={s.seo} />
-              <Gauge
-                label={L("Biztonság", "Security")}
-                v={secV}
-                txt={s.sec ? "✓" : "✕"}
-              />
-            </div>
-            <ul className="finds">
-              {finds.map(([ok, t]) => (
-                <li
-                  key={t}
-                  className={ok ? "ok" : undefined}
-                  style={{ "--c": ok ? "#34d17f" : "#ff5d5d" } as CSSProperties}
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
+            {!error && (
+              <>
+                <div className="grade" style={{ "--c": c } as CSSProperties}>
+                  <b>{g}</b>
+                  <span>
+                    <strong>{verdict}</strong>
+                    {L("Összpontszám: ", "Overall score: ")}
+                    {avg}/100
+                  </span>
+                </div>
+                <div className="gauges">
+                  <Gauge label={L("Sebesség", "Speed")} v={s.perf} />
+                  <Gauge label={L("Mobil", "Mobile")} v={s.mob} />
+                  <Gauge label="Google" v={s.seo} />
+                  <Gauge
+                    label={L("Biztonság", "Security")}
+                    v={secV}
+                    txt={s.sec ? "✓" : "✕"}
+                  />
+                </div>
+                <ul className="finds">
+                  {finds.map(([ok, t]) => (
+                    <li
+                      key={t}
+                      className={ok ? "ok" : undefined}
+                      style={
+                        { "--c": ok ? "#34d17f" : "#ff5d5d" } as CSSProperties
+                      }
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
             <div>
               <Link
                 className="btn btn-volt"

@@ -29,25 +29,34 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "bad_url" }, { status: 400 });
   }
 
-  const api = new URL(
-    "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
-  );
-  api.searchParams.set("url", `https://${domain}`);
-  api.searchParams.set("strategy", "mobile");
-  for (const c of ["performance", "accessibility", "seo", "best-practices"])
-    api.searchParams.append("category", c);
-  if (process.env.PAGESPEED_API_KEY)
-    api.searchParams.set("key", process.env.PAGESPEED_API_KEY);
+  const key = process.env.PAGESPEED_API_KEY;
+  const run = async (target: string) => {
+    const api = new URL(
+      "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
+    );
+    api.searchParams.set("url", target);
+    api.searchParams.set("strategy", "mobile");
+    for (const c of ["performance", "accessibility", "seo", "best-practices"])
+      api.searchParams.append("category", c);
+    if (key) api.searchParams.set("key", key);
+    return fetch(api, { signal: AbortSignal.timeout(60_000) });
+  };
 
   try {
-    const res = await fetch(api, { signal: AbortSignal.timeout(55_000) });
+    let res = await run(`https://${domain}`);
+    if (res.status === 429)
+      return NextResponse.json({ error: "busy" }, { status: 503 });
+    // Some sites only answer on www (or the bare domain fails DNS): try once more.
+    if (!res.ok) res = await run(`https://www.${domain}`);
+    if (res.status === 429)
+      return NextResponse.json({ error: "busy" }, { status: 503 });
     if (!res.ok)
-      return NextResponse.json({ error: "measure_failed" }, { status: 502 });
+      return NextResponse.json({ error: "unreachable" }, { status: 502 });
     const data = (await res.json()) as Lhr;
     const lr = data.lighthouseResult;
     const cat = lr?.categories ?? {};
-    if (!cat.performance)
-      return NextResponse.json({ error: "measure_failed" }, { status: 502 });
+    if (!cat.performance || cat.performance.score == null)
+      return NextResponse.json({ error: "unreachable" }, { status: 502 });
     const finalUrl = lr?.finalDisplayedUrl ?? lr?.finalUrl ?? "";
     const httpsAudit = lr?.audits?.["is-on-https"]?.score;
     return NextResponse.json(
@@ -61,6 +70,6 @@ export async function GET(req: NextRequest) {
       { headers: { "cache-control": "public, max-age=3600" } },
     );
   } catch {
-    return NextResponse.json({ error: "measure_failed" }, { status: 504 });
+    return NextResponse.json({ error: "timeout" }, { status: 504 });
   }
 }
