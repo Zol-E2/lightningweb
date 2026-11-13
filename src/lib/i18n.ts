@@ -38,6 +38,8 @@ export const CONTACT = {
   email: "info@lightningweb.hu",
   phone: "+36 30 137 5903",
   phoneHref: "tel:+36301375903",
+  /** Cal.com booking link (free 20-minute call), synced with Google Calendar */
+  booking: "lightningweb/ingyenes-konzultacio",
   social: {
     facebook: "https://www.facebook.com/lightningwebdesign",
     instagram: "https://www.instagram.com/lightningweb/",

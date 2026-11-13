@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { CONTACT, href, type Lang } from "@/lib/i18n";
+import { CONTACT, type Lang } from "@/lib/i18n";
 import ContactForm from "@/components/interactive/ContactForm";
-import Slots from "@/components/interactive/Slots";
+import Booking from "@/components/interactive/Booking";
 export default function ContactPage({ lang }: { lang: Lang }) {
   const hu = lang === "hu";
   return (
@@ -44,17 +43,7 @@ export default function ContactPage({ lang }: { lang: Lang }) {
               ) : (
                 <h3>Book a free 20-minute call.</h3>
               )}
-              <Slots lang={lang} />
-              <div>
-                <Link className="btn btn-volt" href={href(lang, "contact")}>
-                  {hu ? (
-                    <span>Időpont foglalása</span>
-                  ) : (
-                    <span>Book this slot</span>
-                  )}{" "}
-                  <span className="ar">→</span>
-                </Link>
-              </div>
+              <Booking lang={lang} />
             </div>
             <div>
               <div className="ch">

@@ -107,9 +107,13 @@ export default function Shell({
                   <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
                 </li>
                 <li>
-                  <Link href={href(lang, "contact")}>
+                  <a
+                    href={`https://cal.com/${CONTACT.booking}`}
+                    target="_blank"
+                    rel="noopener"
+                  >
                     {hu ? "Időpontfoglalás" : "Book a call"}
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>

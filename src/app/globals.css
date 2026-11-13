@@ -4774,3 +4774,25 @@ img.ld:not([data-loaded]) {
   letter-spacing: -0.03em;
   margin-bottom: 24px;
 }
+.book-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  color: var(--mute-l);
+  font-size: 15px;
+}
+.book-facts li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.book-facts li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--volt);
+  flex: none;
+}
