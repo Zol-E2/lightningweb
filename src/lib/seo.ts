@@ -177,7 +177,16 @@ export function caseMetadata(lang: Lang, k: RefKey): Metadata {
       title,
       description: d.lead,
       url: path,
-      images: "shots" in r ? [{ url: r.shots.d }] : [OG_IMAGE],
+      images:
+        "shots" in r
+          ? [
+              {
+                url: `${r.shots.d.s}-1440.webp`,
+                width: 1440,
+                height: Math.round((r.shots.d.h * 1440) / 800),
+              },
+            ]
+          : [OG_IMAGE],
       locale: lang === "hu" ? "hu_HU" : "en_GB",
       type: "article",
       siteName: "LightningWeb",

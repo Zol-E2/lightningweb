@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { caseHref, type Lang } from "@/lib/i18n";
 import { REF, REF_KEYS } from "@/lib/refs";
+import { shotSrc } from "@/components/RefMock";
 import { Bolt, Icon } from "@/components/Icon";
 import Img from "@/components/Img";
 
@@ -39,6 +40,7 @@ export default function Showcase({ lang }: { lang: Lang }) {
   const vars = { "--p": r.p, "--s": r.s, "--t": r.tx } as CSSProperties;
   const swap = tick > 0 ? "swap" : "";
   const shots = "shots" in r ? r.shots : undefined;
+  const phone = shots && "m" in shots ? (shots.m as string) : undefined;
 
   return (
     <div className="show">
@@ -78,18 +80,19 @@ export default function Showcase({ lang }: { lang: Lang }) {
           <Img
             key={`si${tick}`}
             className={`simg ${shots ? swap : "off"}`}
-            src={shots?.d ?? "/img/tasko-d.webp"}
+            {...shotSrc(shots?.d ?? REF.tasko.shots.d)}
+            sizes="(max-width: 900px) 92vw, 640px"
             alt={shots ? `${r.name} ${hu ? "weboldal" : "website"}` : ""}
-            width={790}
-            height={494}
+            width={800}
+            height={430}
             fetchPriority={idx === 0 ? "high" : undefined}
           />
         </div>
         <div className="phone">
           <Img
             key={`mi${tick}`}
-            className={`pimg ${shots ? swap : "off"}`}
-            src={shots?.m ?? "/img/tasko-m.webp"}
+            className={`pimg ${phone ? swap : "off"}`}
+            src={phone ?? REF.tasko.shots.m}
             alt=""
             width={375}
             height={790}

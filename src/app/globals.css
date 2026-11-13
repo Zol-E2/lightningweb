@@ -739,7 +739,8 @@ header.nav {
 }
 .stage {
   position: relative;
-  aspect-ratio: 16/11.5;
+  /* browser area matches the ~1.86:1 desktop screenshots */
+  aspect-ratio: 16/9.8;
   max-width: 100%;
 }
 .browser {
@@ -3675,14 +3676,14 @@ a.ind {
 }
 .case-hero-mock {
   position: relative;
-  aspect-ratio: 16/9.5;
+  aspect-ratio: 16/8.6;
   width: 100%;
   max-width: 980px;
   margin-inline: auto;
 }
 @media (max-width: 640px) {
   .case-hero-mock {
-    aspect-ratio: 4/3.2;
+    aspect-ratio: 16/9.6;
   }
 }
 .csr {
@@ -3919,11 +3920,10 @@ a.ind {
 }
 .case-gal {
   display: grid;
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(20px, 3vw, 32px);
   margin-top: clamp(56px, 7vw, 90px);
-}
-.case-gal {
-  max-width: 980px;
+  max-width: 1100px;
   margin-inline: auto;
 }
 .gbrowser {
@@ -3935,17 +3935,23 @@ a.ind {
     0 30px 60px -30px rgba(0, 0, 0, 0.35),
     0 0 0 1px rgba(0, 0, 0, 0.08);
   display: grid;
-  grid-template-rows: 30px auto;
+  grid-template-rows: 30px auto auto;
 }
 .gbrowser img {
   width: 100%;
-  aspect-ratio: 16/10;
-  object-fit: cover;
-  object-position: top;
+  height: auto;
   display: block;
+}
+.gbrowser figcaption {
+  padding: 12px 16px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #555b63;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 .shot .frame:has(img.simg) {
   width: 86%;
+  aspect-ratio: 16/9.6;
 }
 .who {
   display: grid;

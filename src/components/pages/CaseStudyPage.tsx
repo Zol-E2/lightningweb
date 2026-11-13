@@ -3,7 +3,8 @@ import { Fragment } from "react";
 import { caseHref, href, SITE_URL, type Lang } from "@/lib/i18n";
 import JsonLd, { breadcrumbs } from "@/components/JsonLd";
 import { REF, REF_KEYS, type RefKey } from "@/lib/refs";
-import { RefPhone, RefSite, Shot } from "@/components/RefMock";
+import { RefPhone, RefSite, Shot, shotSrc } from "@/components/RefMock";
+import Img from "@/components/Img";
 
 /** Renders "*text*" as the italic accent font. */
 function Accent({ text }: { text: string }) {
@@ -102,7 +103,7 @@ export default function CaseStudyPage({ lang, k }: { lang: Lang; k: RefKey }) {
                 )}
               </div>
             </div>
-            {hasShots ? (
+            {"shots" in r && "m" in r.shots ? (
               <div className="phone">
                 <Shot k={k} which="m" lang={lang} className="pimg" />
               </div>
@@ -126,17 +127,27 @@ export default function CaseStudyPage({ lang, k }: { lang: Lang; k: RefKey }) {
               </div>
             ))}
           </div>
-          {hasShots && (
+          {"shots" in r && (
             <div className="case-gal">
-              <figure className="gbrowser">
-                <div className="chrome">
-                  <i />
-                  <i />
-                  <i />
-                  <span className="url">{r.url}</span>
-                </div>
-                <Shot k={k} which="d2" lang={lang} />
-              </figure>
+              {r.shots.gal.map((g) => (
+                <figure className="gbrowser" key={g.s}>
+                  <div className="chrome">
+                    <i />
+                    <i />
+                    <i />
+                    <span className="url">{r.url}</span>
+                  </div>
+                  <Img
+                    {...shotSrc(g)}
+                    sizes="(max-width: 760px) 92vw, 480px"
+                    alt={`${r.name}: ${g[lang]}`}
+                    width={g.w}
+                    height={g.h}
+                    loading="lazy"
+                  />
+                  <figcaption className="mono">{g[lang]}</figcaption>
+                </figure>
+              ))}
             </div>
           )}
           <h2 className="mid-h">

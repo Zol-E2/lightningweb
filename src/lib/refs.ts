@@ -22,11 +22,23 @@ export type RefText = {
   };
 };
 
+/** A desktop screenshot: base path, size of the 800px version, caption. */
+export type Shot = { s: string; w: number; h: number; hu: string; en: string };
+
+const shot = (s: string, h: number, hu: string, en: string): Shot => ({
+  s: `/img/${s}`,
+  w: 800,
+  h,
+  hu,
+  en,
+});
+
 export type Ref = {
   name: string;
   url: string;
   live: string;
-  shots?: { d: string; d2: string; m: string };
+  /** Screenshots. d and gal entries are base paths: "<base>-800.webp" and "<base>-1440.webp" exist. */
+  shots?: { d: Shot; m?: string; gal: Shot[] };
   /** Filter tag on the work page */
   t: "web" | "shop" | "app";
   /** Brand colours: primary, surface, text */
@@ -45,9 +57,17 @@ export const REF = {
     name: "TaskoGrill",
     url: "taskogrill.com",
     shots: {
-      d: "/img/tasko-d.webp",
-      d2: "/img/tasko-d2.webp",
+      d: shot("tasko-home", 430, "Nyitóoldal", "Home page"),
       m: "/img/tasko-m.webp",
+      gal: [
+        shot(
+          "tasko-shop",
+          430,
+          "Termékek kategóriák szerint",
+          "Products by category",
+        ),
+        shot("tasko-why", 430, "Miért minket válassz?", "Why choose us"),
+      ],
     },
     live: "https://www.taskogrill.com",
     t: "shop" as const,
@@ -143,9 +163,29 @@ export const REF = {
     name: "Ruen Farm",
     url: "ruenfarm.com",
     shots: {
-      d: "/img/ruen-d.webp",
-      d2: "/img/ruen-d2.webp",
+      d: shot("ruen-home", 430, "Nyitóoldal", "Home page"),
       m: "/img/ruen-m.webp",
+      gal: [
+        shot("ruen-honey", 430, "Mézeink oldal", "Our Honey page"),
+        shot(
+          "ruen-indigo",
+          370,
+          "A ritka gyalogakác-méz kiemelése",
+          "The rare False Indigo honey",
+        ),
+        shot(
+          "ruen-crystal",
+          430,
+          "Miért kristályosodik az igazi méz?",
+          "Why real honey crystallises",
+        ),
+        shot(
+          "ruen-label",
+          430,
+          "Saját márkás (private label) aloldal",
+          "Private label page",
+        ),
+      ],
     },
     live: "https://www.ruenfarm.com",
     t: "web" as const,
@@ -240,7 +280,19 @@ export const REF = {
   oz: {
     name: "Oz’s Chili",
     url: "ozchili.hu",
-    shots: { d: "/img/oz-d.webp", d2: "/img/oz-d2.webp", m: "/img/oz-m.webp" },
+    shots: {
+      d: shot("oz-home", 430, "Nyitóoldal", "Home page"),
+      m: "/img/oz-m.webp",
+      gal: [
+        shot("oz-shop", 430, "Webshop kategóriákkal", "Shop with categories"),
+        shot(
+          "oz-chili",
+          430,
+          "Chilifajták csípősség szerint",
+          "Chili varieties by heat",
+        ),
+      ],
+    },
     live: "https://ozchili.hu",
     t: "shop" as const,
     p: "#e0313f",
@@ -335,6 +387,18 @@ export const REF = {
     name: "eNvolve",
     url: "envolve.hu",
     live: "https://envolve.hu",
+    shots: {
+      d: shot("envolve-home", 506, "Diák kezdőoldal", "Student home"),
+      gal: [
+        shot("envolve-lesson", 411, "Hangalapú AI lecke", "AI voice lesson"),
+        shot(
+          "envolve-profile",
+          411,
+          "Profil és kényelmi beállítások",
+          "Profile and comfort settings",
+        ),
+      ],
+    },
     t: "app" as const,
     p: "#7b6cf6",
     s: "#f8f3ec",
