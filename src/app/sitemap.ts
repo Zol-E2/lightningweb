@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { caseHref, ROUTES, SITE_URL, type PageKey } from "@/lib/i18n";
 import { REF_KEYS } from "@/lib/refs";
 import { POSTS, postHref } from "@/lib/posts";
+import { LOCAL } from "@/lib/local";
 
 const abs = (p: string) => `${SITE_URL}${p === "/" ? "" : p}`;
 
@@ -46,5 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
   }
+  for (const l of LOCAL)
+    entries.push({ url: abs(`/${l.slug}`), priority: 0.8 });
   return entries;
 }

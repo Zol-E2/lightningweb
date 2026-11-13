@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { href, type Lang } from "@/lib/i18n";
+import { CONTACT, href, type Lang } from "@/lib/i18n";
 import { takeDraft } from "@/lib/draft";
 
 const NEEDS = [
@@ -184,9 +184,12 @@ export default function ContactForm({ lang }: { lang: Lang }) {
       {status === "error" && (
         <p className="form-err" role="alert">
           {L(
-            "Nem sikerült elküldeni. Kérlek, próbáld újra, vagy írj közvetlenül e-mailt.",
-            "Sending failed. Please try again or email us directly.",
+            "Nem sikerült elküldeni. Próbáld újra, vagy érj el minket közvetlenül: ",
+            "Sending failed. Please try again or reach us directly: ",
           )}
+          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+          {" · "}
+          <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
         </p>
       )}
     </form>

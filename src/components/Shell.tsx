@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import MobileBar from "@/components/interactive/MobileBar";
 import Reveal from "@/components/interactive/Reveal";
 import { Bolt } from "@/components/Icon";
+import { LOCAL } from "@/lib/local";
 
 /** Page frame: menu, closing call-to-action, footer and the mobile action bar. */
 export default function Shell({
@@ -95,6 +96,14 @@ export default function Shell({
                 <li>
                   <Link href={href(lang, "blog")}>Blog</Link>
                 </li>
+                {hu &&
+                  LOCAL.map((l) => (
+                    <li key={l.slug}>
+                      <Link href={`/${l.slug}`}>
+                        Weboldal készítés {l.city}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </div>
             <div>
@@ -150,9 +159,8 @@ export default function Shell({
               </ul>
             </div>
           </div>
-          <div className="wordmark" aria-hidden="true">
-            Lightning<span>Web</span>
-          </div>
+          {/* Decorative: drawn with CSS so it isn't read as low-contrast text. */}
+          <div className="wordmark" aria-hidden="true" />
           <div className="legal mono">
             <span>© 2026 LightningWeb</span>
             <span>

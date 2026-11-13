@@ -50,7 +50,7 @@ export default function ServicesPage({ lang }: { lang: Lang }) {
               )}
             </div>
             <div>
-              {hu ? <h4>Mit kapsz</h4> : <h4>What you get</h4>}
+              {hu ? <h3>Mit kapsz</h3> : <h3>What you get</h3>}
               {hu ? (
                 <ul className="ticks">
                   <li>Egyedi, modern dizájn a cégedre szabva</li>
@@ -102,7 +102,7 @@ export default function ServicesPage({ lang }: { lang: Lang }) {
               )}
             </div>
             <div>
-              {hu ? <h4>Mit kapsz</h4> : <h4>What you get</h4>}
+              {hu ? <h3>Mit kapsz</h3> : <h3>What you get</h3>}
               {hu ? (
                 <ul className="ticks">
                   <li>Bankkártyás fizetés</li>
@@ -163,7 +163,7 @@ export default function ServicesPage({ lang }: { lang: Lang }) {
               )}
             </div>
             <div>
-              {hu ? <h4>Mit kapsz</h4> : <h4>What you get</h4>}
+              {hu ? <h3>Mit kapsz</h3> : <h3>What you get</h3>}
               {hu ? (
                 <ul className="ticks">
                   <li>Google Cégprofil beállítása</li>
@@ -215,7 +215,7 @@ export default function ServicesPage({ lang }: { lang: Lang }) {
               )}
             </div>
             <div>
-              {hu ? <h4>Mit kapsz</h4> : <h4>What you get</h4>}
+              {hu ? <h3>Mit kapsz</h3> : <h3>What you get</h3>}
               {hu ? (
                 <ul className="ticks">
                   <li>Kampány beállítása és kezelése</li>
@@ -260,7 +260,7 @@ export default function ServicesPage({ lang }: { lang: Lang }) {
               )}
             </div>
             <div>
-              {hu ? <h4>Mit kapsz</h4> : <h4>What you get</h4>}
+              {hu ? <h3>Mit kapsz</h3> : <h3>What you get</h3>}
               {hu ? (
                 <ul className="ticks">
                   <li>Havi tartalomterv</li>
@@ -302,7 +302,7 @@ export default function ServicesPage({ lang }: { lang: Lang }) {
               )}
             </div>
             <div>
-              {hu ? <h4>Mit kapsz</h4> : <h4>What you get</h4>}
+              {hu ? <h3>Mit kapsz</h3> : <h3>What you get</h3>}
               {hu ? (
                 <ul className="ticks">
                   <li>Napi biztonsági mentés</li>

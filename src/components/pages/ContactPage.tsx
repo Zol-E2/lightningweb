@@ -39,9 +39,9 @@ export default function ContactPage({ lang }: { lang: Lang }) {
                 {hu ? <span>Leggyorsabb út</span> : <span>Fastest route</span>}
               </span>
               {hu ? (
-                <h3>Foglalj egy 20 perces ingyenes hívást.</h3>
+                <h2>Foglalj egy 20 perces ingyenes hívást.</h2>
               ) : (
-                <h3>Book a free 20-minute call.</h3>
+                <h2>Book a free 20-minute call.</h2>
               )}
               <Booking lang={lang} />
             </div>

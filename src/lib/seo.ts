@@ -24,9 +24,9 @@ const TEXT: Record<
 > = {
   home: {
     hu: {
-      title: "LightningWeb – Weboldal készítés, webshop és online marketing",
+      title: "Weboldal, honlap és webshop készítés – LightningWeb",
       description:
-        "Gyors, modern weboldal és webshop kisvállalkozásoknak, Google és Facebook hirdetéssel, SEO-val. Fix ár, fix határidő, érthetően. Szabolcs és környező megyék, országosan.",
+        "Gyors, modern weboldal, honlap és webshop kisvállalkozásoknak 290 000 Ft-tól, Google és Facebook hirdetéssel, SEO-val. Fix ár, fix határidő. Nyíregyháza, Debrecen és országosan.",
     },
     en: {
       title: "LightningWeb – Websites, online stores and digital marketing",
@@ -36,9 +36,9 @@ const TEXT: Record<
   },
   services: {
     hu: {
-      title: "Szolgáltatások – weboldal, webshop, SEO, hirdetés",
+      title: "Szolgáltatások – honlap készítés, webshop, SEO, hirdetés",
       description:
-        "Weboldal készítés, webshop, Google-keresőoptimalizálás, Google és Facebook hirdetések, közösségi média és karbantartás egy helyen.",
+        "Weboldal és honlap készítés, webshop, Google-keresőoptimalizálás, Google és Facebook hirdetések, közösségi média és karbantartás egy helyen.",
     },
     en: {
       title: "Services – websites, stores, SEO, ads",
@@ -60,7 +60,7 @@ const TEXT: Record<
   },
   pricing: {
     hu: {
-      title: "Árak – weboldal 290 000 Ft-tól",
+      title: "Weboldal készítés árak – honlap 290 000 Ft-tól",
       description:
         "Átlátható árak: weboldal 290 000 Ft-tól, webshop 590 000 Ft-tól, karbantartás 9 900 Ft/hótól. Árkalkulátor, áfa nélküli végleges árak.",
     },

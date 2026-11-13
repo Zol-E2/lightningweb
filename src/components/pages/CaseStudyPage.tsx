@@ -122,7 +122,7 @@ export default function CaseStudyPage({ lang, k }: { lang: Lang; k: RefKey }) {
                 <span className="mono acc">
                   0{j + 1} · {c[0]}
                 </span>
-                <h3>{c[1]}</h3>
+                <h2>{c[1]}</h2>
                 <p>{c[2]}</p>
               </div>
             ))}

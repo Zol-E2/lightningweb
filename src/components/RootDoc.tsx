@@ -15,6 +15,8 @@ const mono = Geist_Mono({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
   display: "swap",
+  /* Not needed for the first paint; leave the bandwidth to the main font. */
+  preload: false,
 });
 const serif = Instrument_Serif({
   variable: "--font-serif",
@@ -22,6 +24,7 @@ const serif = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 /** The <html> document shared by the Hungarian and English root layouts. */

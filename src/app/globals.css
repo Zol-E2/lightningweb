@@ -2370,7 +2370,7 @@ header.nav {
   color: var(--mute);
   max-width: 44ch;
 }
-.sd h4 {
+.sd h3 {
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 400;
@@ -2644,7 +2644,7 @@ header.nav {
   display: grid;
   gap: 16px;
 }
-.booking h3 {
+.booking h2 {
   font-size: 30px;
 }
 .slots {
@@ -2888,7 +2888,11 @@ footer {
   white-space: nowrap;
   overflow: hidden;
 }
-.wordmark span {
+.wordmark::before {
+  content: "Lightning";
+}
+.wordmark::after {
+  content: "Web";
   color: #0f2a33;
 }
 .legal {
@@ -3703,7 +3707,7 @@ a.ind {
   gap: 10px;
   align-content: start;
 }
-.csr h3 {
+.csr h2 {
   font-size: 26px;
 }
 .csr p {
