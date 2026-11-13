@@ -1,10 +1,31 @@
-import { type Lang } from "@/lib/i18n";
+import { CONTACT, SITE_URL, href, type Lang } from "@/lib/i18n";
+import JsonLd from "@/components/JsonLd";
 import Img from "@/components/Img";
 
 export default function AboutPage({ lang }: { lang: Lang }) {
   const hu = lang === "hu";
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Elek Zoltán",
+          jobTitle: hu ? "alapító, webfejlesztő" : "founder, web developer",
+          url: SITE_URL + href(lang, "about"),
+          image: `${SITE_URL}/img/zoltan.webp`,
+          worksFor: { "@id": `${SITE_URL}/#business`, name: "LightningWeb" },
+          sameAs: [CONTACT.social.linkedin],
+          knowsAbout: [
+            "Web design",
+            "Next.js",
+            "WordPress",
+            "SEO",
+            "Google Ads",
+            "Facebook Ads",
+          ],
+        }}
+      />
       <section className="sub ink">
         <div className="grid-bg" />
         <div className="wrap">

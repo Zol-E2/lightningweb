@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { CONTACT, SITE_URL, href, caseHref, type Lang } from "@/lib/i18n";
+import { PRICE } from "@/lib/prices";
 import Showcase from "@/components/interactive/Showcase";
 import Checker from "@/components/interactive/Checker";
 import BeforeAfter from "@/components/interactive/BeforeAfter";
@@ -9,11 +10,81 @@ import LoadTime from "@/components/interactive/LoadTime";
 import CaseGrid from "@/components/CaseGrid";
 /** Structured data so Google understands the business (name, area, services). */
 function JsonLd({ lang }: { lang: Lang }) {
+  const hu = lang === "hu";
+  const offer = (name: string, price: number, desc: string) => ({
+    "@type": "Offer",
+    priceCurrency: "HUF",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      minPrice: price,
+      priceCurrency: "HUF",
+      valueAddedTaxIncluded: false,
+    },
+    itemOffered: { "@type": "Service", name, description: desc },
+  });
   const data = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#business`,
     name: "LightningWeb",
+    legalName: "Elek Zoltán E.V.",
     url: SITE_URL,
+    logo: `${SITE_URL}/apple-icon.png`,
+    image: `${SITE_URL}/og.png`,
+    founder: {
+      "@type": "Person",
+      name: "Elek Zoltán",
+      jobTitle: hu ? "alapító, webfejlesztő" : "founder, web developer",
+      sameAs: [CONTACT.social.linkedin],
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: hu ? "Szolgáltatások" : "Services",
+      itemListElement: [
+        offer(
+          hu ? "Bemutatkozó weboldal" : "Starter website",
+          PRICE.base.starter[0],
+          hu
+            ? "Egyedi tervezésű, gyors weboldal 5 oldallal."
+            : "Custom-designed fast website, 5 pages.",
+        ),
+        offer(
+          hu ? "Céges weboldal" : "Business website",
+          PRICE.base.business[0],
+          hu
+            ? "Bővebb céges weboldal 10 oldallal, SEO alapokkal."
+            : "Larger business website, 10 pages, SEO basics.",
+        ),
+        offer(
+          hu ? "Webshop" : "Online store",
+          PRICE.base.shop[0],
+          hu
+            ? "Webshop fizetéssel, szállítással, számlázással."
+            : "Online store with payments, shipping and invoicing.",
+        ),
+        offer(
+          hu ? "Keresőoptimalizálás (SEO)" : "Search engine optimisation (SEO)",
+          PRICE.monthly.seo,
+          hu
+            ? "Havi SEO, Google Cégprofil kezelés."
+            : "Monthly SEO and Google Business Profile management.",
+        ),
+        offer(
+          hu ? "Google és Facebook hirdetés" : "Google and Facebook ads",
+          PRICE.monthly.ads,
+          hu
+            ? "Hirdetéskezelés a hirdetési költés 15%-áért, próbahónappal."
+            : "Ad management for 15% of ad spend, with a trial month.",
+        ),
+        offer(
+          hu ? "Közösségi média kezelés" : "Social media management",
+          PRICE.monthly.social,
+          hu
+            ? "Facebook és Instagram tartalom és kezelés."
+            : "Facebook and Instagram content and management.",
+        ),
+      ],
+    },
     email: CONTACT.email,
     telephone: CONTACT.phone.replace(/\s/g, ""),
     address: {
