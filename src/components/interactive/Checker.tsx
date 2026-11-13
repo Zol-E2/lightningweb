@@ -128,11 +128,16 @@ export default function Checker({ lang }: { lang: Lang }) {
   }
 
   const s = rep.s;
-  const secV = s.sec ? 100 : 15;
-  const avg = Math.round((s.perf + s.mob + s.seo + secV) / 4);
+  /* Speed weighs most: it is what visitors feel first. One weak area caps the grade. */
+  const avg = Math.round(
+    s.perf * 0.4 + s.mob * 0.25 + s.seo * 0.25 + (s.sec ? 10 : 0),
+  );
+  const low = Math.min(s.perf, s.mob, s.seo);
   const c = colorOf(avg);
-  const g =
-    avg >= 85 ? "A" : avg >= 70 ? "B" : avg >= 55 ? "C" : avg >= 40 ? "D" : "E";
+  let g: "A" | "B" | "C" | "D" | "E" =
+    avg >= 90 ? "A" : avg >= 75 ? "B" : avg >= 60 ? "C" : avg >= 45 ? "D" : "E";
+  if (g === "A" && low < 80) g = "B";
+  if ((g === "A" || g === "B") && (low < 50 || !s.sec)) g = "C";
   const verdict = {
     A: L("Kiváló állapot", "Excellent"),
     B: L("Jó, de van mit javítani", "Good, room to improve"),
@@ -143,44 +148,53 @@ export default function Checker({ lang }: { lang: Lang }) {
     D: L("Gyenge: sok vevőt veszítesz", "Weak: you’re losing customers"),
     E: L("Kritikus: sürgős frissítés kell", "Critical: needs an urgent update"),
   }[g];
-  const finds: [boolean, string][] = [
-    s.perf < 50
-      ? [
-          false,
-          L(
-            "Lassan tölt be. A látogatók egy része már a betöltés előtt elmegy.",
-            "Loads slowly. Some visitors leave before it appears.",
-          ),
-        ]
-      : [true, L("A betöltési sebesség rendben van.", "Load speed is fine.")],
-    s.mob < 60
-      ? [
-          false,
-          L(
-            "Telefonon nehezen használható: apró szövegek, kis gombok.",
-            "Hard to use on phones: tiny text, small buttons.",
-          ),
-        ]
-      : [true, L("Telefonon jól használható.", "Works well on phones.")],
-    s.seo < 60
-      ? [
-          false,
-          L(
-            "A Google nem érti pontosan, mivel foglalkozol, ezért hátrébb sorol.",
-            "Google doesn’t clearly understand what you do, so it ranks you lower.",
-          ),
-        ]
-      : [
-          true,
-          L(
-            "A Google jól érti az oldalt.",
-            "Google understands the site well.",
-          ),
-        ],
+  type Level = "ok" | "warn" | "bad";
+  const lvl = (v: number): Level => (v >= 90 ? "ok" : v >= 50 ? "warn" : "bad");
+  const pick = (v: number, t: Record<Level, string>): [Level, string] => [
+    lvl(v),
+    t[lvl(v)],
+  ];
+  const finds: [Level, string][] = [
+    pick(s.perf, {
+      ok: L("Gyorsan tölt be.", "Loads fast."),
+      warn: L(
+        "Lehetne gyorsabb. Minden plusz másodperc betöltés látogatókba kerül.",
+        "Could be faster. Every extra second of loading costs visitors.",
+      ),
+      bad: L(
+        "Lassan tölt be. A látogatók egy része már a betöltés előtt elmegy.",
+        "Loads slowly. Some visitors leave before it appears.",
+      ),
+    }),
+    pick(s.mob, {
+      ok: L("Telefonon jól használható.", "Works well on phones."),
+      warn: L(
+        "Telefonon használható, de vannak apró hibák (kis gombok, kontraszt).",
+        "Usable on phones, with small issues (small buttons, contrast).",
+      ),
+      bad: L(
+        "Telefonon nehezen használható: apró szövegek, kis gombok.",
+        "Hard to use on phones: tiny text, small buttons.",
+      ),
+    }),
+    pick(s.seo, {
+      ok: L(
+        "A Google jól érti az oldalt.",
+        "Google understands the site well.",
+      ),
+      warn: L(
+        "A Google nagyjából érti az oldalt, de van mit pontosítani.",
+        "Google mostly understands the site, but there’s room to improve.",
+      ),
+      bad: L(
+        "A Google nem érti pontosan, mivel foglalkozol, ezért hátrébb sorol.",
+        "Google doesn’t clearly understand what you do, so it ranks you lower.",
+      ),
+    }),
   ];
   if (!s.sec)
     finds.push([
-      false,
+      "bad",
       L(
         "Nincs biztonságos (https) kapcsolat, a böngésző figyelmeztet.",
         "No secure (https) connection; browsers show a warning.",
@@ -310,17 +324,24 @@ export default function Checker({ lang }: { lang: Lang }) {
                   <Gauge label="Google" v={s.seo} />
                   <Gauge
                     label={L("Biztonság", "Security")}
-                    v={secV}
+                    v={s.sec ? 100 : 15}
                     txt={s.sec ? "✓" : "✕"}
                   />
                 </div>
                 <ul className="finds">
-                  {finds.map(([ok, t]) => (
+                  {finds.map(([lv, t]) => (
                     <li
                       key={t}
-                      className={ok ? "ok" : undefined}
+                      className={lv === "ok" ? "ok" : undefined}
                       style={
-                        { "--c": ok ? "#34d17f" : "#ff5d5d" } as CSSProperties
+                        {
+                          "--c":
+                            lv === "ok"
+                              ? "#34d17f"
+                              : lv === "warn"
+                                ? "#f5b83d"
+                                : "#ff5d5d",
+                        } as CSSProperties
                       }
                     >
                       {t}
