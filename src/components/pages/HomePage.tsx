@@ -183,9 +183,9 @@ export default function HomePage({ lang }: { lang: Lang }) {
               style={{ textDecoration: "none" }}
             >
               <span className="faces">
-                <i style={{ background: "#e8692c" }} />
-                <i style={{ background: "#d4952a" }} />
-                <i style={{ background: "#de3a2c" }} />
+                <i style={{ background: "#f07a26" }} />
+                <i style={{ background: "#5fae3e" }} />
+                <i style={{ background: "#e0313f" }} />
               </span>
               <span>
                 <b style={{ fontWeight: "600", color: "#eceef0" }}>
@@ -211,25 +211,25 @@ export default function HomePage({ lang }: { lang: Lang }) {
           <div className="logo-row">
             <Link href={caseHref(lang, "tasko")}>
               <span>
-                <i style={{ "--lc": "#e8692c" } as CSSProperties} />
+                <i style={{ "--lc": "#f07a26" } as CSSProperties} />
                 TaskoGrill
               </span>
             </Link>
             <Link href={caseHref(lang, "ruen")}>
               <span>
-                <i style={{ "--lc": "#d4952a" } as CSSProperties} />
+                <i style={{ "--lc": "#5fae3e" } as CSSProperties} />
                 Ruen Farm
               </span>
             </Link>
             <Link href={caseHref(lang, "oz")}>
               <span>
-                <i style={{ "--lc": "#de3a2c" } as CSSProperties} />
+                <i style={{ "--lc": "#e0313f" } as CSSProperties} />
                 Oz’s Chili
               </span>
             </Link>
             <Link href={caseHref(lang, "envolve")}>
               <span>
-                <i style={{ "--lc": "#c4562f" } as CSSProperties} />
+                <i style={{ "--lc": "#7b6cf6" } as CSSProperties} />
                 eNvolve
               </span>
             </Link>
