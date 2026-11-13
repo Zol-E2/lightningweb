@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { CONTACT } from "@/lib/i18n";
 
 /**
  * Contact form endpoint. Emails the enquiry to LightningWeb through Resend.
@@ -6,6 +7,8 @@ import { NextResponse } from "next/server";
  *   RESEND_API_KEY  – secret API key from resend.com
  *   CONTACT_TO      – where enquiries go, e.g. info@lightningweb.hu
  *   CONTACT_FROM    – verified sender, e.g. "LightningWeb <urlap@lightningweb.hu>"
+ * When the visitor gives an email address they also get a short, fixed
+ * confirmation (no user text echoed back, so the form can't be used to spam).
  */
 type Body = {
   name?: string;
@@ -96,5 +99,62 @@ export async function POST(req: Request) {
     console.error("contact: resend failed", res.status, await res.text());
     return NextResponse.json({ error: "send_failed" }, { status: 502 });
   }
+
+  if (email) {
+    const confirm = confirmation(b.lang === "en" ? "en" : "hu", name);
+    const c = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${key}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ from, to: [email], reply_to: to, ...confirm }),
+    });
+    // The enquiry itself already arrived, so a failed confirmation is only logged.
+    if (!c.ok)
+      console.error("contact: confirmation failed", c.status, await c.text());
+  }
   return NextResponse.json({ ok: true });
+}
+
+/** Fixed auto-reply. Only a plain first name is used, never free text. */
+function confirmation(lang: "hu" | "en", name: string) {
+  const first =
+    name.split(/\s+/)[lang === "hu" ? name.split(/\s+/).length - 1 : 0];
+  const safe = /^[\p{L}'.-]{1,30}$/u.test(first ?? "") ? first : "";
+  const hu = lang === "hu";
+  const hello = hu
+    ? `Kedves ${safe || "Érdeklődő"}!`
+    : `Hi${safe ? ` ${safe}` : ""},`;
+  const lines = hu
+    ? [
+        "Köszönjük az üzenetedet, megkaptuk!",
+        "24 órán belül, általában sokkal hamarabb felvesszük veled a kapcsolatot.",
+        `Ha sürgős, hívj minket bátran: ${CONTACT.phone}`,
+        `Ha szeretnél, foglalhatsz egy ingyenes konzultációt is: https://cal.com/${CONTACT.booking}`,
+      ]
+    : [
+        "Thanks for your message, we’ve received it!",
+        "We’ll get back to you within 24 hours, usually much sooner.",
+        `If it’s urgent, feel free to call us: ${CONTACT.phone}`,
+        `You can also book a free consultation: https://cal.com/${CONTACT.booking}`,
+      ];
+  const sign = hu
+    ? "Üdvözlettel,\nLightningWeb"
+    : "Best regards,\nLightningWeb";
+  const text = [hello, "", ...lines, "", sign, "https://lightningweb.hu"].join(
+    "\n",
+  );
+  const html =
+    `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#111">` +
+    `<p>${esc(hello)}</p>` +
+    lines.map((l) => `<p>${esc(l)}</p>`).join("") +
+    `<p>${esc(sign).replace("\n", "<br>")}<br><a href="https://lightningweb.hu">lightningweb.hu</a></p></div>`;
+  return {
+    subject: hu
+      ? "Megkaptuk az üzenetedet – LightningWeb"
+      : "We’ve received your message – LightningWeb",
+    text,
+    html,
+  };
 }
