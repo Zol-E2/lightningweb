@@ -7,7 +7,7 @@ const abs = (p: string) => `${SITE_URL}${p === "/" ? "" : p}`;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = (Object.keys(ROUTES) as PageKey[]).filter(
-    (k) => k !== "privacy",
+    (k) => k !== "privacy" && k !== "terms",
   );
   const entries: MetadataRoute.Sitemap = [];
   for (const k of pages) {

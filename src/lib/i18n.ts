@@ -11,6 +11,7 @@ export const ROUTES = {
   blog: { hu: "/blog", en: "/en/blog" },
   contact: { hu: "/kapcsolat", en: "/en/contact" },
   privacy: { hu: "/adatkezeles", en: "/en/privacy" },
+  terms: { hu: "/aszf", en: "/en/terms" },
 } as const;
 
 export type PageKey = keyof typeof ROUTES;

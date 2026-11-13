@@ -1,9 +1,9 @@
 import { CONTACT, type Lang } from "@/lib/i18n";
+import { LEGAL_UPDATED, PRIVACY } from "@/lib/legal";
+import ArticleBody from "@/components/ArticleBody";
+import { formatDate } from "@/components/pages/PostPage";
 
-/**
- * Privacy policy + imprint. The full privacy policy text is still short
- * (ideally checked by a lawyer).
- */
+/** Imprint + full privacy policy (texts in src/lib/legal.ts). */
 export default function PrivacyPage({ lang }: { lang: Lang }) {
   const hu = lang === "hu";
   return (
@@ -15,11 +15,15 @@ export default function PrivacyPage({ lang }: { lang: Lang }) {
             <b>/</b> {hu ? "adatkezeles" : "privacy"}
           </span>
           <h1>{hu ? "Adatkezelés és impresszum" : "Privacy & imprint"}</h1>
+          <p className="lead">
+            {hu ? "Hatályos: " : "Effective: "}
+            {formatDate(lang, LEGAL_UPDATED)}
+          </p>
         </div>
       </section>
       <section className="sec paper">
         <div className="wrap legal-text">
-          <h2>{hu ? "Impresszum" : "Imprint"}</h2>
+          <h2 id="impresszum">{hu ? "Impresszum" : "Imprint"}</h2>
           <ul>
             <li>
               {hu ? "Szolgáltató" : "Provider"}: Elek Zoltán E.V. (
@@ -47,26 +51,14 @@ export default function PrivacyPage({ lang }: { lang: Lang }) {
             </li>
             <li>
               {hu
-                ? "Tárhelyszolgáltató: Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA"
-                : "Hosting: Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA"}
+                ? "Tárhelyszolgáltató: Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA (cloudflare.com)"
+                : "Hosting: Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA (cloudflare.com)"}
             </li>
           </ul>
-          <h2>{hu ? "Adatkezelési tájékoztató" : "Privacy policy"}</h2>
-          <p>
-            {hu
-              ? "Adatkezelő: Elek Zoltán E.V., a fenti impresszumban szereplő adatokkal."
-              : "Data controller: Elek Zoltán E.V., with the details listed in the imprint above."}
-          </p>
-          <p>
-            {hu
-              ? "Az ajánlatkérő űrlapon megadott adatokat (név, cégnév, e-mail cím, telefonszám, üzenet) kizárólag az érdeklődés megválaszolására és az ajánlatadásra használjuk, harmadik félnek nem adjuk át. Az üzenet e-mailben érkezik hozzánk; az e-mail küldését a Resend (Resend, Inc.) végzi."
-              : "We use the details entered in the enquiry form (name, company, email, phone, message) only to reply to your enquiry and send a quote, and we never pass them on to third parties. The message reaches us by email, sent through Resend (Resend, Inc.)."}
-          </p>
-          <p>
-            {hu
-              ? "A weboldal nem használ követő (marketing) sütiket. A teljes tájékoztató szövege hamarosan elérhető. Kérdés esetén írj a fenti e-mail címre."
-              : "This website uses no tracking (marketing) cookies. The full policy text will be available soon. For questions, write to the email address above."}
-          </p>
+          <h2 id="adatkezeles" className="legal-h">
+            {hu ? "Adatkezelési tájékoztató" : "Privacy policy"}
+          </h2>
+          <ArticleBody lang={lang} body={PRIVACY[lang]} />
         </div>
       </section>
     </>

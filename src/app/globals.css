@@ -4796,3 +4796,22 @@ img.ld:not([data-loaded]) {
   background: var(--volt);
   flex: none;
 }
+.legal-text .tip {
+  border-left: 3px solid var(--volt);
+  background: #fff;
+  padding: 14px 18px;
+  border-radius: 0 12px 12px 0;
+}
+.legal-text strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.legal-text a {
+  color: var(--volt-deep);
+}
+.legal-text .legal-h {
+  margin-top: 28px;
+}
+.legal-text p + ul {
+  margin-top: -8px;
+}

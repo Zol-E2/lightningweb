@@ -159,6 +159,8 @@ export default function Shell({
               <Link href={href(lang, "privacy")}>
                 {hu ? "Adatkezelés és impresszum" : "Privacy & imprint"}
               </Link>
+              {" · "}
+              <Link href={href(lang, "terms")}>{hu ? "ÁSZF" : "Terms"}</Link>
             </span>
           </div>
         </div>

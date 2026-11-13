@@ -116,6 +116,17 @@ const TEXT: Record<
       description: "LightningWeb privacy policy and imprint.",
     },
   },
+  terms: {
+    hu: {
+      title: "Általános szerződési feltételek (ÁSZF)",
+      description:
+        "A LightningWeb szolgáltatásainak általános szerződési feltételei.",
+    },
+    en: {
+      title: "General terms and conditions",
+      description: "General terms and conditions of LightningWeb services.",
+    },
+  },
 };
 
 function alternates(
@@ -148,7 +159,8 @@ export function pageMetadata(lang: Lang, page: PageKey): Metadata {
       images: [OG_IMAGE],
     },
     twitter: { card: "summary_large_image" },
-    robots: page === "privacy" ? { index: false } : undefined,
+    robots:
+      page === "privacy" || page === "terms" ? { index: false } : undefined,
   };
 }
 
