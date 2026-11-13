@@ -333,8 +333,8 @@ export const REF = {
   },
   envolve: {
     name: "eNvolve",
-    url: "envolve-app.vercel.app",
-    live: "https://envolve-app.vercel.app",
+    url: "envolve.hu",
+    live: "https://envolve.hu",
     t: "app" as const,
     p: "#7b6cf6",
     s: "#f8f3ec",
