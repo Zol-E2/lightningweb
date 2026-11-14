@@ -199,7 +199,7 @@ export default function Nav({
               aria-controls="overlay"
               onClick={() => setOpen(true)}
             >
-              {hu ? "Menü" : "Menu"}
+              <span className="ml">{hu ? "Menü" : "Menu"}</span>
               <i />
             </button>
           </div>
