@@ -16,7 +16,7 @@ A helyi titkos kulcsokat a `.dev.vars` fájlba írd (minta: `.dev.vars.example`)
 
 | Hol | Mi van ott |
 | --- | --- |
-| `src/app/(hu)/…` | Magyar oldalak (`/`, `/szolgaltatasok`, `/munkaink`, `/arak`, `/rolunk`, `/blog`, `/kapcsolat`, `/adatkezeles`) |
+| `src/app/(hu)/…` | Magyar oldalak (`/`, `/szolgaltatasok`, `/munkaink`, `/arak`, `/rolunk`, `/blog`, `/kapcsolat`, `/adatkezeles`, `/aszf`, helyi oldalak) |
 | `src/app/(en)/en/…` | Angol oldalak (`/en`, `/en/services`, …) |
 | `src/app/api/contact` | Az ajánlatkérő űrlap: e-mailt küld a Resenden keresztül |
 | `src/app/api/pagespeed` | Az ingyenes oldalellenőrző: a Google PageSpeed mérését futtatja |
@@ -29,14 +29,11 @@ A helyi titkos kulcsokat a `.dev.vars` fájlba írd (minta: `.dev.vars.example`)
 | `src/app/globals.css` | Az összes stílus |
 | `public/img/` | Képernyőképek és a portré |
 
-## Kitöltendő
+## Dokumentáció
 
-- `src/lib/i18n.ts` → `CONTACT`: telefonszám, WhatsApp, közösségi linkek
-- `src/components/pages/PrivacyPage.tsx`: impresszum adatai és a teljes adatkezelési tájékoztató
-- Kezdőlap: valódi ügyfélvélemény (most helyőrző)
-- Kapcsolat oldal: az időpontfoglalás most csak minta, ide jöhet egy valódi foglalórendszer (pl. Cal.com)
+A teljes átadási dokumentáció (architektúra, szolgáltatások, döntések, nyitott teendők): [docs/HANDOFF.md](docs/HANDOFF.md).
 
-## Élesítés a Cloudflare-en
+## Élesítés a Cloudflare-en (már be van állítva, újrabeállításhoz)
 
 1. Cloudflare dashboard → **Workers & Pages** → **Create application** → **GitHub** → válaszd ki ezt a repót.
    - Projekt neve: `lightningweb` (egyeznie kell a `wrangler.jsonc` nevével)
