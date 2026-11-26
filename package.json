@@ -14,7 +14,7 @@
     "format": "prettier --write src"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "^1.20.17",
+    "@opennextjs/cloudflare": "^1.20.19",
     "next": "16.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0"
@@ -26,6 +26,6 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "typescript": "^5",
-    "wrangler": "^4.161.0"
+    "wrangler": "^4.168.0"
   }
 }
