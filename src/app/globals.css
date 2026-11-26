@@ -4662,7 +4662,7 @@ img.ld:not([data-loaded]) {
   margin-top: 10px;
 }
 .sk-btn {
-  width: 150px;
+  width: min(150px, 45%);
   height: 48px;
   border-radius: 999px;
 }
@@ -4693,7 +4693,7 @@ img.ld:not([data-loaded]) {
   display: grid;
   gap: 16px;
   margin-top: 40px;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
 }
 .sk-card {
   height: 260px;

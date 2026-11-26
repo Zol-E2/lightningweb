@@ -8,6 +8,11 @@ import BeforeAfter from "@/components/interactive/BeforeAfter";
 import Race from "@/components/interactive/Race";
 import LoadTime from "@/components/interactive/LoadTime";
 import CaseGrid from "@/components/CaseGrid";
+
+// The client quote stays hidden until a real testimonial replaces the
+// placeholder text below (no made-up reviews on the live site).
+const SHOW_TESTIMONIAL = false;
+
 /** Structured data so Google understands the business (name, area, services). */
 function JsonLd({ lang }: { lang: Lang }) {
   const hu = lang === "hu";
@@ -1250,33 +1255,42 @@ export default function HomePage({ lang }: { lang: Lang }) {
               )}
             </div>
           </div>
-          <div className="quote" style={{ marginTop: "clamp(64px,8vw,110px)" }}>
-            <span className="label mono">
+          {SHOW_TESTIMONIAL && (
+            <div
+              className="quote"
+              style={{ marginTop: "clamp(64px,8vw,110px)" }}
+            >
+              <span className="label mono">
+                {hu ? (
+                  <span>Ügyfeleink mondták</span>
+                ) : (
+                  <span>What clients say</span>
+                )}
+              </span>
               {hu ? (
-                <span>Ügyfeleink mondták</span>
+                <blockquote>
+                  Ide kerül egy valódi ügyfélvélemény, ami konkrétan elmondja,
+                  mi változott az új weboldal után.”
+                </blockquote>
               ) : (
-                <span>What clients say</span>
+                <blockquote>
+                  A real client testimonial goes here, saying exactly what
+                  changed after the new website.”
+                </blockquote>
               )}
-            </span>
-            {hu ? (
-              <blockquote>
-                Ide kerül egy valódi ügyfélvélemény, ami konkrétan elmondja, mi
-                változott az új weboldal után.”
-              </blockquote>
-            ) : (
-              <blockquote>
-                A real client testimonial goes here, saying exactly what changed
-                after the new website.”
-              </blockquote>
-            )}
-            <div className="person">
-              <i />
-              <div>
-                {hu ? <b>Ügyfél neve</b> : <b>Client name</b>}
-                {hu ? <span>Cégnév · Város</span> : <span>Company · City</span>}
+              <div className="person">
+                <i />
+                <div>
+                  {hu ? <b>Ügyfél neve</b> : <b>Client name</b>}
+                  {hu ? (
+                    <span>Cégnév · Város</span>
+                  ) : (
+                    <span>Company · City</span>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
       <section className="sec ink">
